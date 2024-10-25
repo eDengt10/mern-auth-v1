@@ -1,11 +1,18 @@
+//* ====== Imports of BuiltIn Components ====== */
 import { useState } from "react";
 import { FiMail, FiLock, FiUser, FiArrowRight } from "react-icons/fi";
 
-import GoogleIcon from "../assets/AuthStuffs/google.svg";
-import GitHubIcon from "../assets/AuthStuffs/github.svg";
-import "../styles/AuthScreen/AuthScreen.scss";
 
-const AuthScreen = () => {
+//* ====== Imports of Icons ====== */
+import { GoogleIcon, GitHubIcon } from "./imports";
+
+
+//* ====== Imports of StyleSheet ====== */
+import "../styles/AuthPage/AuthPage.scss";
+
+
+//* ====== AuthPage Component ====== */
+const AuthPage = () => {
 	const [isLogin, setIsLogin] = useState(true);
 
 	const toggleForm = () => {
@@ -138,4 +145,4 @@ const AuthScreen = () => {
 	);
 };
 
-export default AuthScreen;
+export default AuthPage;
