@@ -1,9 +1,17 @@
 //* ====== Imports of BuiltIn Components ====== *//
-import React from 'react'
+import React, { Fragment } from 'react'
 
+
+//* ====== Imports of Child Components ====== *//
+import Header from '../components/Home/Header'
+
+
+//* ====== HomePage Component ====== *//
 const Home = () => {
   return (
-    <div>Home</div>
+    <Fragment>
+        <Header />
+    </Fragment>
   )
 }
 

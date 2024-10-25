@@ -2,7 +2,7 @@
 import React from 'react'
 
 
-//* ====== AuthPage Component ====== *//
+//* ====== ProfilePage Component ====== *//
 const Profile = () => {
   return (
     <div>Profile</div>
