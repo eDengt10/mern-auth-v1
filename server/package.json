@@ -1,0 +1,32 @@
+{
+  "name": "mern-auth-v1",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mern authentication App",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eDengt10/mern-auth-v1.git"
+  },
+  "keywords": [
+    "mern"
+  ],
+  "author": "eDenxGT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eDengt10/mern-auth-v1/issues"
+  },
+  "homepage": "https://github.com/eDengt10/mern-auth-v1#readme",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
