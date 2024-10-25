@@ -1,17 +1,17 @@
-//* ====== Imports of BuiltIn Components ====== */
+//* ====== Imports of BuiltIn Components ====== *//
 import { useState } from "react";
 import { FiMail, FiLock, FiUser, FiArrowRight } from "react-icons/fi";
 
 
-//* ====== Imports of Icons ====== */
+//* ====== Imports of Icons ====== *//
 import { GoogleIcon, GitHubIcon } from "./imports";
 
 
-//* ====== Imports of StyleSheet ====== */
+//* ====== Imports of StyleSheet ====== *//
 import "../styles/AuthPage/AuthPage.scss";
 
 
-//* ====== AuthPage Component ====== */
+//* ====== AuthPage Component ====== *//
 const AuthPage = () => {
 	const [isLogin, setIsLogin] = useState(true);
 
