@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eDengt10/mern-auth-v1.git"
+    "url": "git+https://github.com/eDenxGT/mern-auth-v1.git"
   },
   "keywords": [
     "mern"
@@ -17,13 +17,14 @@
   "author": "eDenxGT",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eDengt10/mern-auth-v1/issues"
+    "url": "https://github.com/eDenxGT/mern-auth-v1/issues"
   },
-  "homepage": "https://github.com/eDengt10/mern-auth-v1#readme",
+  "homepage": "https://github.com/eDenxGT/mern-auth-v1#readme",
   "dependencies": {
     "chalk": "^5.3.0",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "mongodb": "^6.10.0",
     "mongoose": "^8.7.2"
   },
   "devDependencies": {
