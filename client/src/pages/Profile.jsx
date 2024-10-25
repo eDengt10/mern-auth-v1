@@ -5,7 +5,7 @@ import React from 'react'
 //* ====== ProfilePage Component ====== *//
 const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>ProfilePage</div>
   )
 }
 

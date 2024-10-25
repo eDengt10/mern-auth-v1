@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import chalk from "chalk";
 
+// Dotenv config
 dotenv.config();
 
 const MongoString = process.env.DATABASE_URL;
