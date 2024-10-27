@@ -7,7 +7,7 @@ const AdminHome = () => {
 	const admin = {
 		name: "Admin Name",
 		email: "admin@example.com",
-		avatar: "https://via.placeholder.com/100",f
+		avatar: "https://via.placeholder.com/100",
 	};
 
 	return (
