@@ -14,72 +14,103 @@ $white: #ffffff;
 
 // Mixins
 @mixin flex-center {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @mixin card-shadow {
-	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 // Container
-.admin-home-container {
-	min-height: 100vh;
-	@include flex-center;
-	background: linear-gradient(135deg, $gray-50 0%, $gray-100 100%);
-	padding: 1.5rem;
+.admin-container {
+  min-height: 100vh;
+  @include flex-center;
+  background: linear-gradient(135deg, $gray-50 0%, $gray-100 100%);
+  padding: 1.5rem;
 }
 
 // Card
-.admin-home-card {
-	width: 100%;
-	max-width: 420px;
-	background: $white;
-	border-radius: 1rem;
-	@include card-shadow;
-	overflow: hidden;
-	transition: all 0.3s ease;
-	text-align: center;
-	padding: 2rem;
+.admin-card {
+  width: 100%;
+  max-width: 420px;
+  background: $white;
+  border-radius: 1rem;
+  @include card-shadow;
+  overflow: hidden;
+  
+  &__header {
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+  }
 
-	&__avatar {
-		width: 100px;
-		height: 100px;
-		border-radius: 50%;
-		margin: 0 auto 1rem;
-		border: 3px solid $primary;
-		object-fit: cover;
-	}
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    @include flex-center;
+    background: $gray-100;
+    border-radius: 50%;
+    
+    &-icon {
+      width: 40px;
+      height: 40px;
+      color: $gray-600;
+    }
+  }
 
-	&__name {
-		color: $gray-800;
-		font-size: 1.5rem;
-		font-weight: 700;
-		margin-bottom: 0.5rem;
-	}
+  &__title {
+    color: $gray-800;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
 
-	&__email {
-		color: $gray-500;
-		font-size: 0.875rem;
-		margin-bottom: 1rem;
-	}
+  &__subtitle {
+    color: $gray-500;
+    font-size: 0.875rem;
+  }
 
-	&__button {
-		@include flex-center;
-		gap: 0.5rem;
-		background: $primary;
-		color: $white;
-		padding: 0.75rem;
-		border: none;
-		border-radius: 0.5rem;
-		font-weight: 500;
-		cursor: pointer;
-		transition: all 0.2s;
-		text-decoration: none;
+  &__content {
+    padding: 0 2rem 1.5rem;
+  }
 
-		&:hover {
-			background: $primary-dark;
-		}
-	}
+  &__button {
+    display: block;
+    width: 100%;
+    @include flex-center;
+    background: $primary;
+    color: $white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $primary-dark;
+    }
+  }
+
+  &__footer {
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid $gray-200;
+    color: $gray-600;
+    font-size: 0.875rem;
+  }
+
+  &__link {
+    color: $primary;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $primary-dark;
+    }
+  }
 }
