@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../../../styles/Admin/Dashboard/Add_Edit_User.scss';
 
 const AddUser = () => {
