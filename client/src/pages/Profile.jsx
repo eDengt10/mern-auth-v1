@@ -1,11 +1,16 @@
 //* ====== Imports of BuiltIn Components ====== *//
-import React from 'react'
+import React, { Fragment } from 'react'
+import ProfilePage from '../components/Profile/Profile'
+import Header from '../components/Home/Header'
 
 
 //* ====== ProfilePage Component ====== *//
 const Profile = () => {
   return (
-    <div>ProfilePage</div>
+    <Fragment>
+      <Header />
+      <ProfilePage />
+    </Fragment>
   )
 }
 

@@ -2,16 +2,25 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import chalk from "chalk";
+import cors from 'cors';
 
+import userRoutes from './routes/userRoutes.js'
+import authRoutes from './routes/authRoutes.js'
 
-import userRouter from './routes/userRoute.js'
-
-// Dotenv config
 dotenv.config();
 
-const MongoString = process.env.DATABASE_URL;
-const HOSTNAME = process.env.HOSTNAME;
-const PORT = process.env.PORT;
+const MongoString = process.env.DATABASE_URL || null;
+const HOSTNAME = process.env.HOSTNAME || "localhost";
+const PORT = process.env.PORT || 5000;
+
+const app = express();
+
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+	credentials: true
+}));
+
 
 mongoose
 	.connect(MongoString)
@@ -41,11 +50,15 @@ mongoose
 		console.log(errorMessage);
 	});
 
-const app = express();
 
-app.use('/', userRouter)
+app.use(express.json())
 
-// Start server
+app.use('/', userRoutes)
+app.use('/auth', authRoutes)
+
+
+
+// Starting server
 app.listen(PORT, () => {
 	console.log(
 		chalk.yellowBright.bold(

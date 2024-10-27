@@ -95,9 +95,9 @@ $white: #ffffff;
         transition: width 0.2s;
       }
 
-      &:hover::after {
-        width: 50%;
-      }
+      // &:hover::after {
+      //   width: 50%;
+      // }
     }
   }
 
