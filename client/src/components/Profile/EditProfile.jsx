@@ -3,21 +3,21 @@ import { Camera, User, Save, X } from "lucide-react";
 import "../../styles/Profile/EditProfile.scss";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import axiosInstance from "../../api/axiosConfig";
 
 const EditProfilePage = () => {
-    const fileInputRef = useRef()
+	const fileInputRef = useRef();
 	const [errors, setError] = useState({});
 
 	const [avatar, setAvatar] = useState(null);
 	const navigate = useNavigate();
-	const user = useSelector(state => state.user.user)
+	const user = useSelector((state) => state.user.user);
 
-	useEffect(()=>{
-		if(user.avatar){
-			setAvatar(user.avatar)
-			}
-	},[])
+	useEffect(() => {
+		if (user.avatar) {
+			setAvatar(user.avatar);
+		}
+	}, [user.avatar]);
 
 	const [formData, setFormData] = useState({
 		name: user.name,
@@ -28,20 +28,35 @@ const EditProfilePage = () => {
 	});
 
 	const handleInputChange = (e) => {
-		setFormData({...formData, [e.target.name]: e.target.value})
+		setFormData({ ...formData, [e.target.name]: e.target.value });
 		console.log(formData);
-		
-	}
+	};
 
-	const handleAvatarChange =(e)=> {
-		console.log(e.target.files[0]);
-		
-	}
+	const handleAvatarChange = (e) => {
+		const file = e.target.files[0];
+		setAvatar(URL.createObjectURL(file));
+		setFormData({ ...formData, avatar: file });
+	};
 
 	const handleFormSubmit = async (e) => {
-		e.preventDefault()
-		
-	}
+		e.preventDefault();
+		const data = new FormData();
+
+		for (const key in formData) {
+			data.append(key, formData[key]);
+		}
+
+		try {
+			const response = await axiosInstance.put(`/user/update/${user.id}`,data);
+			console.log(response.data);
+			if(response.status === 200) {
+				console.log("Profile Updated");
+				navigate('/profile')
+			} 
+		} catch (error) {
+			console.log("Error in profile updation", error);
+		}
+	};
 
 	const handleCancel = () => {
 		navigate("/profile");
@@ -64,13 +79,13 @@ const EditProfilePage = () => {
 					<input
 						type="file"
 						accept="image/*"
-                        ref={fileInputRef}
+						ref={fileInputRef}
 						className="edit-profile__avatar-input"
 						aria-label="Upload profile picture"
 						onChange={handleAvatarChange}
 					/>
 					<button
-						onClick={()=> fileInputRef.current?.click()}
+						onClick={() => fileInputRef.current?.click()}
 						type="button"
 						className="edit-profile__avatar-edit"
 						aria-label="Change profile picture">
@@ -78,7 +93,9 @@ const EditProfilePage = () => {
 					</button>
 				</div>
 
-				<form className="edit-profile__form" onSubmit={handleFormSubmit}>
+				<form
+					className="edit-profile__form"
+					onSubmit={handleFormSubmit}>
 					<div className="edit-profile__form-group">
 						<label className="edit-profile__form-label">Name</label>
 						<input
@@ -89,7 +106,11 @@ const EditProfilePage = () => {
 							placeholder="Enter your name"
 							onChange={handleInputChange}
 						/>
-						{errors.name && <div className="edit-profile__form-error">{errors.name}</div>}
+						{errors.name && (
+							<div className="edit-profile__form-error">
+								{errors.name}
+							</div>
+						)}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -103,9 +124,12 @@ const EditProfilePage = () => {
 							className="edit-profile__form-input"
 							placeholder="Enter your email"
 							onChange={handleInputChange}
-
 						/>
-						{errors.email && <div className="edit-profile__form-error">{errors.email}</div>}
+						{errors.email && (
+							<div className="edit-profile__form-error">
+								{errors.email}
+							</div>
+						)}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -119,9 +143,12 @@ const EditProfilePage = () => {
 							className="edit-profile__form-input"
 							placeholder="Enter your phone number"
 							onChange={handleInputChange}
-
 						/>
-						{errors.phone && <div className="edit-profile__form-error">{errors.phone}</div>}
+						{errors.phone && (
+							<div className="edit-profile__form-error">
+								{errors.phone}
+							</div>
+						)}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -135,9 +162,12 @@ const EditProfilePage = () => {
 							className="edit-profile__form-input"
 							placeholder="Enter current password"
 							onChange={handleInputChange}
-
 						/>
-						{errors.currentPassword && <div className="edit-profile__form-error">{errors.currentPassword}</div>}
+						{errors.currentPassword && (
+							<div className="edit-profile__form-error">
+								{errors.currentPassword}
+							</div>
+						)}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -151,9 +181,12 @@ const EditProfilePage = () => {
 							className="edit-profile__form-input"
 							placeholder="Enter new password"
 							onChange={handleInputChange}
-
 						/>
-						{errors.newPassword && <div className="edit-profile__form-error">{errors.newPassword}</div>}
+						{errors.newPassword && (
+							<div className="edit-profile__form-error">
+								{errors.newPassword}
+							</div>
+						)}
 					</div>
 
 					<div className="edit-profile__buttons">

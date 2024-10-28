@@ -8,13 +8,5 @@ const axiosInstance = axios.create({
 		"Content-Type": "application/json",
 	},
 });
-const axiosInstanceMultiData = axios.create({
-	baseURL,
-	headers: {
-		"Content-Type": "multipart/form-data",
-	},
-});
-
-export {axiosInstanceMultiData}
 
 export default axiosInstance;

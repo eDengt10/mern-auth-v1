@@ -6,8 +6,7 @@ const userRouter = express.Router();
 
 
 
-userRouter.post("/signup", test);
-
+userRouter.put(`/user/update/:id`, )
 
 
 
