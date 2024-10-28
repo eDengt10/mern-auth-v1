@@ -23,17 +23,26 @@ $white: #ffffff;
 
 @mixin card-shadow {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.dashboard-card {
+  &__link {
+    text-decoration: none;
+    color: inherit; // This ensures the link inherits the text color from its parent
+    
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .edit-user-form {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-
+  
   .form-group {
     margin-bottom: 1.5rem;
-
     label {
       display: block;
       color: $gray-700;
@@ -41,7 +50,6 @@ $white: #ffffff;
       font-weight: 500;
       margin-bottom: 0.5rem;
     }
-
     input {
       width: 100%;
       padding: 0.75rem 1rem;
@@ -49,22 +57,14 @@ $white: #ffffff;
       border-radius: 0.5rem;
       font-size: 0.875rem;
       transition: all 0.2s;
-
       &::placeholder {
         color: $gray-400;
       }
-
       &:focus {
         outline: none;
         border-color: $primary;
         box-shadow: 0 0 0 3px rgba($primary, 0.1);
       }
-    }
-  }
-
-  .dashboard-card {
-    &__link {
-      text-decoration: none;
     }
   }
 
@@ -75,23 +75,21 @@ $white: #ffffff;
     margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid $gray-200;
-
     button {
       @include flex-center;
-      
+     
       &.dashboard-card__nav-button {
         background: $gray-100;
         color: $gray-700;
-        
+       
         &:hover {
           background: $gray-200;
         }
       }
-
       &.dashboard-card__add-button {
         background: $primary;
         color: $white;
-        
+       
         &:hover {
           background: $primary-dark;
         }

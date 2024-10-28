@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "../../../styles/Admin/Dashboard/Add_Edit_User.scss";
+import "../../../styles/Admin/Dashboard/Add_User.scss";
 
 const EditUser = () => {
 	const [formData, setFormData] = useState({

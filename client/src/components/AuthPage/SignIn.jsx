@@ -1,35 +1,40 @@
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
-import "../../styles/AuthPage/AuthPage.scss";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Spinner } from "../../pages/imports";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../api/axiosConfig";
+import { setUser } from "../../redux/slices/userSlice";
+
+import "../../styles/AuthPage/AuthPage.scss";
 
 const SignIn = () => {
-	const [isLoading, setIsLogin] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [formData, setFormData] = useState({});
 	const [error, setError] = useState(null);
 
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
-		setIsLogin(true);
+		setIsLoading(true);
 		setError(null);
 
 		try {
-			var response = await axiosInstance.post("/auth/signin", formData);
-			const { token, user } = response.data;
-
-			localStorage.setItem("token", token);
-			localStorage.setItem("user", JSON.stringify(user));
-
-			navigate("/home");
+			const response = await axiosInstance.post("/auth/signin", formData);
+			if (response.data.success) {
+				const data = response.data;
+				dispatch(setUser({ user: data.user, token: data.token }));
+				navigate("/home");
+			} else {
+				setError("Login failed. Please try again.");
+			}
 		} catch (error) {
 			console.log("Login failed:", error.response?.data?.message);
 			setError(error.response?.data?.message);
 		} finally {
-			setIsLogin(false);
+			setIsLoading(false);
 		}
 	};
 
@@ -75,11 +80,7 @@ const SignIn = () => {
 						/>
 					</div>
 
-					{error && (
-						<div className="auth-form__error">
-							{error}
-						</div>
-					)}
+					{error && <div className="auth-form__error">{error}</div>}
 
 					<div className="auth-form__options">
 						<label className="auth-form__remember">
