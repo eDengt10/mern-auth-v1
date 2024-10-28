@@ -38,9 +38,9 @@ const EditProfilePage = () => {
 		
 	}
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = async (e) => {
 		e.preventDefault()
-
+		
 	}
 
 	const handleCancel = () => {
