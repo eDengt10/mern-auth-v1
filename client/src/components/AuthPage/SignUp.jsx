@@ -40,9 +40,6 @@ const SignUp = () => {
 
 			alert("Sign up successful") 
 
-			const data = await response.json()
-			console.log("Signup Successfull- DATA: ", data);
-			
 
 		} catch (error) {
 			console.log("Sign Up error: ", error.message);

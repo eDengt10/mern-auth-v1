@@ -1,24 +1,47 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Camera, User, Save, X } from "lucide-react";
 import "../../styles/Profile/EditProfile.scss";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 const EditProfilePage = () => {
     const fileInputRef = useRef()
-	const [avatarPreview, setAvatarPreview] = useState(null);
+	const [errors, setError] = useState({});
+
+	const [avatar, setAvatar] = useState(null);
 	const navigate = useNavigate();
+	const user = useSelector(state => state.user.user)
+
+	useEffect(()=>{
+		if(user.avatar){
+			setAvatar(user.avatar)
+			}
+	},[])
 
 	const [formData, setFormData] = useState({
-		name: "Sarah Anderson",
-		email: "sarah.anderson@example.com",
-		phone: "+1 (555) 123-4567",
+		name: user.name,
+		email: user.email,
+		phone: user.phone,
 		currentPassword: "",
 		newPassword: "",
 	});
 
-    const handleAvatarClick = () => {
-        fileInputRef.current?.click()
-    }
+	const handleInputChange = (e) => {
+		setFormData({...formData, [e.target.name]: e.target.value})
+		console.log(formData);
+		
+	}
+
+	const handleAvatarChange =(e)=> {
+		console.log(e.target.files[0]);
+		
+	}
+
+	const handleFormSubmit = (e) => {
+		e.preventDefault()
+
+	}
 
 	const handleCancel = () => {
 		navigate("/profile");
@@ -32,8 +55,8 @@ const EditProfilePage = () => {
 
 				<div className="edit-profile__avatar">
 					<div className="edit-profile__avatar-image">
-						{avatarPreview ? (
-							<img src={avatarPreview} alt="Profile preview" />
+						{avatar ? (
+							<img src={avatar} alt="Profile preview" />
 						) : (
 							<User />
 						)}
@@ -44,9 +67,10 @@ const EditProfilePage = () => {
                         ref={fileInputRef}
 						className="edit-profile__avatar-input"
 						aria-label="Upload profile picture"
+						onChange={handleAvatarChange}
 					/>
 					<button
-						onClick={handleAvatarClick}
+						onClick={()=> fileInputRef.current?.click()}
 						type="button"
 						className="edit-profile__avatar-edit"
 						aria-label="Change profile picture">
@@ -54,7 +78,7 @@ const EditProfilePage = () => {
 					</button>
 				</div>
 
-				<form className="edit-profile__form">
+				<form className="edit-profile__form" onSubmit={handleFormSubmit}>
 					<div className="edit-profile__form-group">
 						<label className="edit-profile__form-label">Name</label>
 						<input
@@ -63,8 +87,9 @@ const EditProfilePage = () => {
 							value={formData.name}
 							className="edit-profile__form-input"
 							placeholder="Enter your name"
+							onChange={handleInputChange}
 						/>
-						{/* {errors.name && <div className="edit-profile__form-error">{errors.name}</div>} */}
+						{errors.name && <div className="edit-profile__form-error">{errors.name}</div>}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -77,8 +102,10 @@ const EditProfilePage = () => {
 							value={formData.email}
 							className="edit-profile__form-input"
 							placeholder="Enter your email"
+							onChange={handleInputChange}
+
 						/>
-						{/* {errors.email && <div className="edit-profile__form-error">{errors.email}</div>} */}
+						{errors.email && <div className="edit-profile__form-error">{errors.email}</div>}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -91,8 +118,10 @@ const EditProfilePage = () => {
 							value={formData.phone}
 							className="edit-profile__form-input"
 							placeholder="Enter your phone number"
+							onChange={handleInputChange}
+
 						/>
-						{/* {errors.phone && <div className="edit-profile__form-error">{errors.phone}</div>} */}
+						{errors.phone && <div className="edit-profile__form-error">{errors.phone}</div>}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -105,8 +134,10 @@ const EditProfilePage = () => {
 							value={formData.currentPassword}
 							className="edit-profile__form-input"
 							placeholder="Enter current password"
+							onChange={handleInputChange}
+
 						/>
-						{/* {errors.currentPassword && <div className="edit-profile__form-error">{errors.currentPassword}</div>} */}
+						{errors.currentPassword && <div className="edit-profile__form-error">{errors.currentPassword}</div>}
 					</div>
 
 					<div className="edit-profile__form-group">
@@ -119,8 +150,10 @@ const EditProfilePage = () => {
 							value={formData.newPassword}
 							className="edit-profile__form-input"
 							placeholder="Enter new password"
+							onChange={handleInputChange}
+
 						/>
-						{/* {errors.newPassword && <div className="edit-profile__form-error">{errors.newPassword}</div>} */}
+						{errors.newPassword && <div className="edit-profile__form-error">{errors.newPassword}</div>}
 					</div>
 
 					<div className="edit-profile__buttons">

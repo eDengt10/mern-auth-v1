@@ -23,10 +23,11 @@ const userSignIn = async (req, res) => {
 		const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, {
 			expiresIn: "1d",
 		});
-		const { hashedPassword, ...otherDetails } = user;
+		const { hashedPassword, ...otherDetails } = user._doc;
 		res.status(200).json({
 			token,
 			user: otherDetails,
+			success: true
 		});
 	} catch (error) {
 		console.log(error.message);

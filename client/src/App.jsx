@@ -12,17 +12,18 @@ import Dashboard from "./components/Admin/Dashboard/Dashboard";
 import AddUser from "./components/Admin/Dashboard/AddUser";
 import EditUser from "./components/Admin/Dashboard/EditUser";
 
+import {ProtectUserPages, ProtectUserAuth} from "./contexts/ProtectUserRoute";
 
 //* ====== Main App Component ====== *//
 function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/signin" element={<SignIn />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/home" element={<Home />} />
-				<Route path="/profile" element={<Profile />} />
-				<Route path="/edit-profile" element={<EditProfile />} />
+				<Route path="/signin" element={<ProtectUserAuth><SignIn /></ProtectUserAuth>} />
+				<Route path="/signup" element={<ProtectUserAuth><SignUp /></ProtectUserAuth>} />
+				<Route path="/home" element={<ProtectUserPages><Home /></ProtectUserPages>} />
+				<Route path="/profile" element={<ProtectUserPages><Profile /></ProtectUserPages>} />
+				<Route path="/edit-profile" element={<ProtectUserPages><EditProfile /></ProtectUserPages>} />
 
 				{/* ADMIN SIDE */}
 				<Route path="/admin/signin" element={<AdminSignIn />} />

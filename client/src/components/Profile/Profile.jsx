@@ -3,13 +3,12 @@ import { useRef, useState } from "react";
 import {  Edit, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import "../../styles/Profile/Profile.scss";
+import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
-    const [profileData] = useState({
-        name: "Sarah Anderson",
-        email: "sarah.anderson@example.com",
-        phone: "+1 (555) 123-4567",
-    });
+    const profileData = useSelector((state)=>state.user.user)
+    console.log(profileData);
+    
 
     return (
         <div className="profile">
@@ -25,29 +24,34 @@ const ProfilePage = () => {
                 </div>
                 <div className="profile__avatar">
                     <div className="profile__avatar-image">
-                        <User />
+                        {profileData.avatar ? (
+                            <img src={profileData.avatar} alt={"<User /> "} />
+                        ) : (
+                            
+                            <User />
+                        )}
                     </div>
                 </div>
                 <div className="profile__info">
                     <div className="profile__info-group">
-                        <span className="profile__info-label">Name</span>
-                        <div className="profile__info-value">
+                        <span className="profile__info-label">Name :</span>
+                        <span className="profile__info-value">
                             {profileData.name}
-                        </div>
+                        </span>
                     </div>
                     <div className="profile__info-group">
-                        <span className="profile__info-label">Email</span>
-                        <div className="profile__info-value">
+                        <span className="profile__info-label">Email :</span>
+                        <span className="profile__info-value">
                             {profileData.email}
-                        </div>
+                        </span>
                     </div>
                     <div className="profile__info-group">
                         <span className="profile__info-label">
-                            Phone Number
+                            Phone Number :
                         </span>
-                        <div className="profile__info-value">
+                        <span className="profile__info-value">
                             {profileData.phone}
-                        </div>
+                        </span>
                     </div>
                 </div>
                 <div className="profile__card-linktohome">
