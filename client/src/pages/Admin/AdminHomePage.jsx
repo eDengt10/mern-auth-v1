@@ -1,12 +1,13 @@
-import React from 'react'
-import AdminHome from '../../components/Admin/Home/AdminHome'
+import AdminHeader from "../../components/Admin/Home/AdminHeader";
+import AdminHome from "../../components/Admin/Home/AdminHome";
 
 const AdminHomePage = () => {
-  return (
-    <>
-        <AdminHome />
-    </>
-  )
-}
+	return (
+		<>
+			<AdminHeader />
+			<AdminHome />
+		</>
+	);
+};
 
-export default AdminHomePage
+export default AdminHomePage;

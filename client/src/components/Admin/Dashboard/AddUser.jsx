@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../../styles/Admin/Dashboard/Add_User.scss';
+import { useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +9,7 @@ const AddUser = () => {
     phone: '',
     password: ''
   });
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,8 +25,8 @@ const AddUser = () => {
   };
 
   const handleBack = () => {
-    window.location.href = '/admin';
-  };
+    navigate('/admin/dashboard')
+    };
 
   return (
     <div className="dashboard-container">

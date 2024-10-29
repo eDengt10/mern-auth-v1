@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Search, Edit2, Trash2, Home } from 'lucide-react';
 import '../../../styles/Admin/Dashboard/AdminDashboard.scss';
+import { useNavigate } from 'react-router-dom';
 
-const AdminDashboard = () => {
+const Dashboard = () => {
   const [users, setUsers] = useState([
     { id: 1, name: 'John Doe', email: 'john@example.com' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
@@ -10,9 +11,15 @@ const AdminDashboard = () => {
     { id: 4, name: 'Sarah Williams', email: 'sarah@example.com' },
   ]);
 
+  const navigate = useNavigate()
+
   const handleEdit = (id) => {
     console.log(`Edit user with id: ${id}`);
+    navigate(`/admin/edit-user`)
   };
+
+  const handleSearch = (e) => {
+  }
 
   const handleDelete = (id) => {
     console.log(`Delete user with id: ${id}`);
@@ -25,7 +32,7 @@ const AdminDashboard = () => {
           <h1 className="dashboard-card__title">Admin Dashboard</h1>
           <button 
             className="dashboard-card__nav-button"
-            onClick={() => window.location.href = '/home'}
+            onClick={() => navigate('/admin/home')}
           >
             <Home className="dashboard-card__nav-icon" />
             Back to Home
@@ -39,9 +46,10 @@ const AdminDashboard = () => {
               type="text" 
               placeholder="Search users..." 
               className="dashboard-card__search-input"
+              onChange={handleSearch}
             />
           </div>
-          <button className="dashboard-card__add-button">
+          <button onClick={()=>navigate('/admin/add-user')} className="dashboard-card__add-button">
             Add New User
           </button>
         </div>
@@ -88,4 +96,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default Dashboard;

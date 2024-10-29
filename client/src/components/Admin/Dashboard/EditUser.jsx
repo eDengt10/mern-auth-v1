@@ -11,7 +11,6 @@ const EditUser = () => {
 	});
 
 	useEffect(() => {
-		// Simulate fetching user data
 		const userData = {
 			name: "John Doe",
 			email: "john@example.com",

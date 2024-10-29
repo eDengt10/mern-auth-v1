@@ -8,18 +8,18 @@ import { SignIn, SignUp } from "./components/imports";
 import EditProfile from "./components/Profile/EditProfile";
 import AdminSignIn from "./components/Admin/AdminSignIn";
 import AdminHomePage from "./pages/Admin/AdminHomePage";
-import Dashboard from "./components/Admin/Dashboard/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard/AdminDashboard";
 import AddUser from "./components/Admin/Dashboard/AddUser";
 import EditUser from "./components/Admin/Dashboard/EditUser";
 
-import {ProtectUserPages, ProtectUserAuth, InitalPathHandle} from "./contexts/ProtectUserRoute";
+import {ProtectUserPages, ProtectUserAuth, InitialPathHandle} from "./contexts/ProtectUserRoute";
 
 //* ====== Main App Component ====== *//
 function App() {
 	return (
 		<Router>
 			<Routes>
-				<Route path="/" element={<InitalPathHandle />}/>
+				<Route path="/" element={<InitialPathHandle />}/>
 				<Route path="/signin" element={<ProtectUserAuth><SignIn /></ProtectUserAuth>} />
 				<Route path="/signup" element={<ProtectUserAuth><SignUp /></ProtectUserAuth>} />
 				<Route path="/home" element={<ProtectUserPages><Home /></ProtectUserPages>} />

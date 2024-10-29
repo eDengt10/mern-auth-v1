@@ -35,7 +35,7 @@ const SignIn = () => {
                 setError("Login failed. Please try again.");
             }
         } catch (error) {
-            console.log("Login failed:", error.response?.data?.message);
+            console.log("Login failed:", error,  error.response?.data?.message);
             setError(error.response?.data?.message);
         } finally {
             setIsLoading(false);

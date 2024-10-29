@@ -1,4 +1,3 @@
-import React from "react";
 import { Home } from 'lucide-react';
 import "../../styles/Home/HomeBody.scss";
 

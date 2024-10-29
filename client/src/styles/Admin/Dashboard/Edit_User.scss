@@ -28,7 +28,7 @@ $white: #ffffff;
 .dashboard-card {
   &__link {
     text-decoration: none;
-    color: inherit; // This ensures the link inherits the text color from its parent
+    color: inherit; 
     
     &:hover {
       text-decoration: none;
@@ -57,6 +57,7 @@ $white: #ffffff;
       border-radius: 0.5rem;
       font-size: 0.875rem;
       transition: all 0.2s;
+      box-sizing: border-box;
       &::placeholder {
         color: $gray-400;
       }

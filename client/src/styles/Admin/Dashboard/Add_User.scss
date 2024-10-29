@@ -26,6 +26,16 @@ $white: #ffffff;
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.dashboard-card {
+  &__link {
+    text-decoration: none;
+    color: inherit; 
+    
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
 // Dashboard Container
 .dashboard-container {
   padding: 2rem;
@@ -86,7 +96,7 @@ $white: #ffffff;
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: all 0.2s;
-
+  box-sizing: border-box;
   &::placeholder {
     color: $gray-400;
   }
@@ -121,7 +131,7 @@ $white: #ffffff;
       border-radius: 0.5rem;
       font-size: 0.875rem;
       transition: all 0.2s;
-
+      box-sizing: border-box;
       &::placeholder {
         color: $gray-400;
       }
