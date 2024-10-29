@@ -86,17 +86,7 @@ const SignIn = () => {
 
                     {error && <div className="auth-form__error">{error}</div>}
 
-                    <div className="auth-form__options">
-                        <label className="auth-form__remember">
-                            <input type="checkbox" />
-                            Remember me
-                        </label>
-                        <a href="#" className="auth-form__forgot">
-                            Forgot Password?
-                        </a>
-                    </div>
-
-                    <button type="submit" className="auth-form__submit">
+                    <button type="submit" className="auth-form__submit" disabled={isLoading}>
                         {isLoading ? (
                             <Spinner size="small" color="primary" />
                         ) : (
@@ -107,22 +97,6 @@ const SignIn = () => {
                         )}
                     </button>
                 </form>
-
-                <div className="auth-social">
-                    <div className="auth-social__divider">
-                        <span>Or continue with</span>
-                    </div>
-                    <div className="auth-social__buttons">
-                        <button type="button" className="auth-social__button">
-                            <img src="/google-icon.svg" alt="Google" />
-                            Google
-                        </button>
-                        <button type="button" className="auth-social__button">
-                            <img src="/github-icon.svg" alt="GitHub" />
-                            Github
-                        </button>
-                    </div>
-                </div>
 
                 <div className="auth-card__footer">
                     Dont have an account?{" "}

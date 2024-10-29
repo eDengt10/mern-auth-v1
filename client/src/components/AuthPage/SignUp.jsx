@@ -7,17 +7,12 @@ import {axiosInstance} from "../../api/axiosConfig";
 
 const SignUp = () => {
 	const [isLoading, setIsLogin] = useState(false);
-	const [isAgreed, setIsAgreed] = useState(false);
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		phone: "",
 		password: "",
 	});
-
-	const handleCheckBoxChange = (e) => {
-		setIsAgreed(e.target.checked);
-	};
 
 	const handleInputChange = (e) => {
 		setFormData({
@@ -105,25 +100,12 @@ const SignUp = () => {
 						/>
 					</div>
 
-					<div className="auth-form__terms">
-						<label className="auth-form__remember">
-							<input
-								type="checkbox"
-								required
-								checked={isAgreed}
-								onChange={handleCheckBoxChange}
-							/>
-							I agree to the{" "}
-							<a className="auth-card__link">Terms of Service</a>{" "}
-							and{" "}
-							<a className="auth-card__link">Privacy Policy</a>
-						</label>
-					</div>
+
 
 					<button
 						type="submit"
 						className="auth-form__submit"
-						disabled={!isAgreed || isLoading}>
+						disabled={isLoading}>
 						{isLoading ? (
 							<Spinner size="small" />
 						) : (
@@ -134,22 +116,6 @@ const SignUp = () => {
 						)}
 					</button>
 				</form>
-
-				<div className="auth-social">
-					<div className="auth-social__divider">
-						<span>Or continue with</span>
-					</div>
-					<div className="auth-social__buttons">
-						<button type="button" className="auth-social__button">
-							<img src="/google-icon.svg" alt="Google" />
-							Google
-						</button>
-						<button type="button" className="auth-social__button">
-							<img src="/github-icon.svg" alt="GitHub" />
-							Github
-						</button>
-					</div>
-				</div>
 
 				<div className="auth-card__footer">
 					Already have an account?{" "}

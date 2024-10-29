@@ -5,7 +5,6 @@ const adminSlice = createSlice({
   initialState: {
     adminUser: null,
     adminToken: null,
-    settings: null
   },
   reducers: {
     setAdmin(state, action) {
