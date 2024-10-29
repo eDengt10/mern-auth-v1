@@ -4,8 +4,12 @@ import { updateUser } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 
-userRouter.put(`/user/update/:id`, upload.single('avatar'), updateUser)
+const debug = (req, res, next) => {
+	console.log("Request Body: ", req.body);
+	console.log("Request File: ", req.file);
+   next()
+};
 
-
+userRouter.put(`/update/:id`, upload.single("avatar"), debug, updateUser);
 
 export default userRouter;

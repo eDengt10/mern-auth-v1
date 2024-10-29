@@ -3,7 +3,7 @@ import "../../styles/AuthPage/AuthPage.scss";
 import { useState } from "react";
 import { Spinner } from "../../pages/imports";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../api/axiosConfig";
+import {axiosInstance} from "../../api/axiosConfig";
 
 const AdminSignIn = () => {
 	const [isLoading, setIsLogin] = useState(false);

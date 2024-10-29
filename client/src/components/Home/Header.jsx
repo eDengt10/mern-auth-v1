@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Added useNavigate
-import { FiUser, FiHome, FiInfo, FiMenu, FiX, FiLogOut } from "react-icons/fi"; // Added FiLogOut
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { FiUser, FiHome, FiMenu, FiX, FiLogOut } from "react-icons/fi"; 
+import { useSelector, useDispatch } from "react-redux"; 
+import { clearUser } from "../../redux/slices/userSlice";
 import "../../styles/Home/Header.scss";
-import { useSelector, useDispatch } from "react-redux"; // Added useDispatch
 
 const Header = () => {
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const user = useSelector((state) => state.user.user);
-	console.log(user);
+	const handleLogout = () => {
+		dispatch(clearUser())
+	}
 
 	return (
 		<header className="home-header">
@@ -34,9 +36,9 @@ const Header = () => {
 								to="/profile"
 								className="home-header__profile-link">
 								<div className="home-header__profile-image">
-									{user.avatar ? (
+									{user?.avatar ? (
 										<img
-											src={user.avatar}
+											src={`http://localhost:3001${user.avatar}`}
 											className="home-header__profile-avatar"
 											alt="User"
 										/>
@@ -49,7 +51,7 @@ const Header = () => {
 								</span>
 							</Link>
 						</div>
-						<button className="home-header__logout-btn">
+						<button className="home-header__logout-btn" onClick={handleLogout}>
 							<FiLogOut />
 							<span>Logout</span>
 						</button>

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 
 const updateUser = async (req, res) => {
 	try {
+				
 		const userId = req.params.id;
 		const { name, email, phone, currentPassword, newPassword } = req.body;
 
@@ -10,7 +11,7 @@ const updateUser = async (req, res) => {
 			return res.status(400).json({message:"Current password required"})
 		}
 
-		const avatar = req.file ? req.file.filename : null;
+		const avatar = req.file ? `/uploads/user-avatars/${req.file.filename}` : null;
 
 		const user = await User.findById(userId);
 
@@ -19,6 +20,7 @@ const updateUser = async (req, res) => {
 		}
 
 		let updatedData = {};
+
 		if (name) updatedData.name = name;
 		if (email) updatedData.email = email;
 		if (phone) updatedData.phone = phone;
@@ -40,9 +42,10 @@ const updateUser = async (req, res) => {
 			if(updateUser) {
 				return res.status(200).json({message:"User updated successfully", updatedUser})
 			}
+
 			return res.status(500).json({message: "Failed to update user"})
 
-	} catch (error) {
+	} catch (error) {		
 		console.log("Update User Error: ", error.message);
 		res.status(500).json({ message: "Internal server error" });
 	}

@@ -1,5 +1,4 @@
 // ProfilePage.jsx
-import { useRef, useState } from "react";
 import {  Edit, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import "../../styles/Profile/Profile.scss";
@@ -7,7 +6,6 @@ import { useSelector } from "react-redux";
 
 const ProfilePage = () => {
     const profileData = useSelector((state)=>state.user.user)
-    console.log(profileData);
     
 
     return (
@@ -24,8 +22,8 @@ const ProfilePage = () => {
                 </div>
                 <div className="profile__avatar">
                     <div className="profile__avatar-image">
-                        {profileData.avatar ? (
-                            <img src={profileData.avatar} alt={"<User /> "} />
+                        {profileData?.avatar ? (
+                            <img src={`http://localhost:3001${profileData?.avatar}`} alt={"<User /> "} />
                         ) : (
                             
                             <User />

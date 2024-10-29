@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Spinner } from "../../pages/imports";
 import { Link, useNavigate } from "react-router-dom";
-import axiosInstance from "../../api/axiosConfig";
+import {axiosInstance} from "../../api/axiosConfig";
 import { setUser } from "../../redux/slices/userSlice";
 
 import "../../styles/AuthPage/AuthPage.scss";

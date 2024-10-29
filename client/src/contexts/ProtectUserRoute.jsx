@@ -1,6 +1,5 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 
 function ProtectUserPages({ children }) {
@@ -19,4 +18,13 @@ function ProtectUserAuth({ children }) {
 	return children;
 }
 
-export {ProtectUserPages, ProtectUserAuth};
+function InitalPathHandle() {
+	const token = useSelector(state=> state.user.token)
+	if(token) {
+		return <Navigate to="/home" />;
+	} else {
+		return <Navigate to="/signin" />;
+	}
+}
+
+export {ProtectUserPages, ProtectUserAuth, InitalPathHandle};

@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import chalk from "chalk";
 import cors from 'cors';
+import path from "path";
+import nocache from "nocache";
 
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
@@ -49,21 +51,14 @@ mongoose
 		);
 		console.log(errorMessage);
 	});
-
-
 app.use(express.json())
 
-app.use('/', userRoutes)
+app.use('/user', userRoutes)
 app.use('/auth', authRoutes)
+app.use('/uploads/user-avatars', express.static(path.join( 'uploads/userAvatars')))
 
+app.use(nocache());
 
-app.use((req, res, next) => {
-    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-    next();
-});
-
-
-// Starting server
 app.listen(PORT, () => {
 	console.log(
 		chalk.yellowBright.bold(

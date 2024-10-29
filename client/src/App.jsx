@@ -12,13 +12,14 @@ import Dashboard from "./components/Admin/Dashboard/Dashboard";
 import AddUser from "./components/Admin/Dashboard/AddUser";
 import EditUser from "./components/Admin/Dashboard/EditUser";
 
-import {ProtectUserPages, ProtectUserAuth} from "./contexts/ProtectUserRoute";
+import {ProtectUserPages, ProtectUserAuth, InitalPathHandle} from "./contexts/ProtectUserRoute";
 
 //* ====== Main App Component ====== *//
 function App() {
 	return (
 		<Router>
 			<Routes>
+				<Route path="/" element={<InitalPathHandle />}/>
 				<Route path="/signin" element={<ProtectUserAuth><SignIn /></ProtectUserAuth>} />
 				<Route path="/signup" element={<ProtectUserAuth><SignUp /></ProtectUserAuth>} />
 				<Route path="/home" element={<ProtectUserPages><Home /></ProtectUserPages>} />
