@@ -1,12 +1,10 @@
 import express from "express";
-
-import { test } from "../controllers/userController.js";
+import upload from "../config/multerConfig.js";
+import { updateUser } from "../controllers/userController.js";
 
 const userRouter = express.Router();
 
-
-
-userRouter.put(`/user/update/:id`, )
+userRouter.put(`/user/update/:id`, upload.single('avatar'), updateUser)
 
 
 
