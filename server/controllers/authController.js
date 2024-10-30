@@ -20,14 +20,17 @@ const userSignIn = async (req, res) => {
 		if (!isMatch) {
 			return res.status(400).json({ message: "Password is incorrect." });
 		}
+		if (user.is_admin) {
+			return res.status(400).json({ message: "You are an Admin" });
+		}
 		const token = jwt.sign({ id: user._id }, JWT_SECRET_KEY, {
 			expiresIn: "1d",
 		});
-		const { hashedPassword, ...otherDetails } = user._doc;
+
 		res.status(200).json({
 			token,
-			user: otherDetails,
-			success: true
+			user: user,
+			success: true,
 		});
 	} catch (error) {
 		console.log(error.message);
@@ -46,9 +49,9 @@ const userSignUp = async (req, res) => {
 		const newUser = new User({
 			name,
 			email,
-         phone,
+			phone,
 			password: hashedPassword,
-		});        
+		});
 
 		await newUser.save();
 
@@ -59,4 +62,34 @@ const userSignUp = async (req, res) => {
 	}
 };
 
-export { userSignIn, userSignUp };
+const adminSignIn = async (req, res) => {
+	try {
+		const { email, password } = req.body;
+		const admin = await User.findOne({ email });
+		if (!admin) {
+			return res.status(400).json({ message: "Account not found" });
+		}
+		if (!admin.is_admin) {
+			return res.status(400).json({ message: "You are not an Admin" });
+		}
+		const isMatch = await bcrypt.compare(password, admin.password);
+		if (!isMatch) {
+			return res.status(400).json({ message: "Password incorrect" });
+		}
+		const token = jwt.sign({ _id: admin._id }, JWT_SECRET_KEY, {
+			expiresIn: "1d",
+		});
+
+		res.status(200).json({
+			message: "Admin login successful",
+			adminToken: token,
+			adminData: admin,
+			success:true
+		});
+	} catch (error) {
+		console.log("Admin Signin Error:", error.message);
+		res.status(500).json({ message: "Internal server error" });
+	}
+};
+
+export { userSignIn, userSignUp, adminSignIn };

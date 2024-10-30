@@ -12,12 +12,11 @@ const adminSlice = createSlice({
       state.adminToken = action.payload.adminToken;
     },
     updateAdminSettings(state, action) {
-      state.settings = action.payload.settings;
+      state.adminUser = action.payload.adminUser;
     },
     clearAdmin(state) {
       state.adminUser = null;
       state.adminToken = null;
-      state.settings = null;
     }
   }
 });

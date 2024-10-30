@@ -14,23 +14,24 @@ const AdminSignIn = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const handleFormSubmit = (e) => {
+	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
 		setError(null);
 		try {
-			const response = axiosInstance.post("/auth/admin/signin", formData);
+			const response = await axiosInstance.post("/auth/admin/signin", formData);
+			console.log(response);
+			
 
 			if (response.data.success) {
 				const data = response.data;
-
+				console.log(data);
+				
 				dispatch(setAdmin({
 						adminUser: data.adminData,
 						adminToken: data.adminToken,
 					}));
 				navigate("/admin/home");
-			} else {
-				setError("Login failed.")
 			}
 		} catch (error) {
 			console.log(error.message);
@@ -52,7 +53,7 @@ const AdminSignIn = () => {
 				<div className="auth-card__header">
 					<h1 className="auth-card__title">Admin Login</h1>
 					<p className="auth-card__subtitle">
-						Enter your credentials to access your account
+						Sign in to access the admin dashboard
 					</p>
 				</div>
 
@@ -100,8 +101,8 @@ const AdminSignIn = () => {
 
 				<div className="auth-card__footer">
 					Dont have an account?{" "}
-					<Link to="/signup">
-						<a className="auth-card__link">Sign Up</a>
+					<Link to="/signup" className="auth-card__link">
+						Sign Up
 					</Link>
 				</div>
 			</div>

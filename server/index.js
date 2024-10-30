@@ -8,6 +8,7 @@ import nocache from "nocache";
 
 import userRoutes from './routes/userRoutes.js'
 import authRoutes from './routes/authRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 
 dotenv.config();
 
@@ -55,6 +56,7 @@ app.use(express.json())
 
 app.use('/user', userRoutes)
 app.use('/auth', authRoutes)
+app.use('/admin', adminRoutes)
 app.use('/uploads/user-avatars', express.static(path.join( 'uploads/userAvatars')))
 
 app.use(nocache());

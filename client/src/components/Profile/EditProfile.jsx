@@ -63,13 +63,7 @@ const EditProfilePage = () => {
     try {
       const response = await axiosMultipartInstance.put(
         `/user/update/${user._id}`,
-        formDataToSend,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+        formDataToSend);
 
       if (response.status === 200) {
         dispatch(updateUser({ user: response.data.updatedUser }));

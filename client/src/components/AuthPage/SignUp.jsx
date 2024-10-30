@@ -119,9 +119,7 @@ const SignUp = () => {
 
 				<div className="auth-card__footer">
 					Already have an account?{" "}
-					<a className="auth-card__link">
-						<Link to="/signin">Sign In</Link>
-					</a>
+						<Link to="/signin" className="auth-card__link">Sign In</Link>
 				</div>
 			</div>
 		</div>

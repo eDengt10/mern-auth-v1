@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
 	avatar: {
 		type: String,
 	},
-	isAdmin: { 
+	is_admin: { 
 		 type: Boolean,
 		 default: false,
 	},

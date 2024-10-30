@@ -9,7 +9,7 @@ const AdminHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const dispatch = useDispatch();
 
-    const adminUser = useSelector((state) => state.admin.adminUser);
+    const admin = useSelector((state) => state.admin.adminUser);
     
     const handleLogout = () => {
         dispatch(clearAdmin());
