@@ -1,181 +1,182 @@
+$primary: #4f46e5;
+$primary-dark: #4338ca;
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$white: #ffffff;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 .edit-admin-container {
-	padding: 2rem;
-	display: flex;
-	justify-content: center;
-	align-items: flex-start;
-	min-height: 100vh;
-	background-color: #f5f5f5;
+  min-height: 100vh;
+  @include flex-center;
+  background: linear-gradient(135deg, $gray-50 0%, $gray-100 100%);
+  padding: 1.5rem;
 }
 
 .edit-admin-card {
-	background: white;
-	border-radius: 12px;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 600px;
-	padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  background: $white;
+  border-radius: 1rem;
+  @include card-shadow;
+  overflow: hidden;
 
-	&__header {
-		text-align: center;
-		margin-bottom: 2rem;
-	}
+  &__header {
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+  }
 
-	&__title {
-		font-size: 1.8rem;
-		color: #333;
-		margin-bottom: 0.5rem;
-	}
+  &__title {
+    color: $gray-800;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
 }
 
 .edit-admin-form {
-	&__avatar-section {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-bottom: 2rem;
-	}
+  padding: 0 2rem 2rem;
 
-	&__avatar {
-		position: relative;
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		background-color: #f0f0f0;
-		margin-bottom: 1rem;
-		overflow: hidden;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+  &__avatar-section {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
 
-	&__avatar-preview {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+  &__avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    @include flex-center;
+    background: $gray-100;
+    border-radius: 50%;
+    overflow: hidden;
 
-	&__avatar-icon {
-		width: 60px;
-		height: 60px;
-		color: #666;
-	}
+    &-preview {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-	&__avatar-remove {
-		position: absolute;
-		top: 0;
-		right: 0;
-		background: rgba(0, 0, 0, 0.5);
-		border: none;
-		border-radius: 50%;
-		width: 24px;
-		height: 24px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		cursor: pointer;
-		color: white;
+    &-icon {
+      width: 40px;
+      height: 40px;
+      color: $gray-400;
+    }
+  }
 
-		&:hover {
-			background: rgba(0, 0, 0, 0.7);
-		}
-	}
+  &__avatar-upload {
+    margin-top: 1rem;
+  }
 
-	&__avatar-upload {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+  &__avatar-input {
+    display: none;
+  }
 
-	&__avatar-input {
-		display: none;
-	}
+  &__avatar-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: $gray-100;
+    color: $gray-700;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
 
-	&__avatar-label {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 1rem;
-		background-color: #f0f0f0;
-		border-radius: 6px;
-		cursor: pointer;
-		transition: background-color 0.2s;
+    &:hover {
+      background: $gray-200;
+    }
+  }
 
-		&:hover {
-			background-color: #e0e0e0;
-		}
-	}
+  &__group {
+    margin-bottom: 1.5rem;
 
-	&__group {
-		margin-bottom: 1.5rem;
+    label {
+      display: block;
+      color: $gray-700;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
 
-		label {
-			display: block;
-			margin-bottom: 0.5rem;
-			color: #555;
-			font-weight: 500;
-		}
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid $gray-300;
+      border-radius: 0.5rem;
+      color: $gray-800;
+      transition: border-color 0.2s;
+		box-sizing: border-box;
 
-		input {
-			width: 100%;
-			padding: 0.75rem;
-			border: 1px solid #ddd;
-			border-radius: 6px;
-			font-size: 1rem;
-			box-sizing: border-box;
+      &:focus {
+        outline: none;
+        border-color: $primary;
+      }
+    }
+  }
 
-			&:focus {
-				outline: none;
-				border-color: #007bff;
-				box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-			}
-		}
-	}
+  &__password-section {
+    margin-bottom: 1.5rem;
+  }
 
-	&__password-section {
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
 
-		h3 {
-			margin-bottom: 1.5rem;
-			color: #333;
-		}
-	}
+  &__submit {
+    flex: 1;
+    @include flex-center;
+    background: $primary;
+    color: $white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
 
-	&__error {
-		padding: 0.75rem;
-		background-color: #fee2e2;
-		border: 1px solid #fecaca;
-		border-radius: 6px;
-		color: #dc2626;
-		margin-bottom: 1rem;
-	}
+    &:hover {
+      background: $primary-dark;
+    }
 
-	&__success {
-		padding: 0.75rem;
-		background-color: #dcfce7;
-		border: 1px solid #bbf7d0;
-		border-radius: 6px;
-		color: #16a34a;
-		margin-bottom: 1rem;
-	}
+    &:disabled {
+      background: $gray-400;
+      cursor: not-allowed;
+    }
+  }
 
-	&__submit {
-		width: 100%;
-		padding: 0.75rem;
-		background-color: #007bff;
-		color: white;
-		border: none;
-		border-radius: 6px;
-		font-size: 1rem;
-		font-weight: 500;
-		cursor: pointer;
-		transition: background-color 0.2s;
+  &__cancel {
+    flex: 1;
+    @include flex-center;
+    background: $white;
+    color: $gray-700;
+    padding: 0.75rem;
+    border: 1px solid $gray-300;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
 
-		&:hover {
-			background-color: #0056b3;
-		}
-
-		&:disabled {
-			background-color: #ccc;
-			cursor: not-allowed;
-		}
-	}
+    &:hover {
+      background: $gray-50;
+      border-color: $gray-400;
+    }
+  }
 }

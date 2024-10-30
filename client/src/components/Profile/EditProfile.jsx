@@ -48,6 +48,7 @@ const EditProfilePage = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    try {
     const formDataToSend = new FormData();
 
     if (formData.name !== user.name) formDataToSend.append("name", formData.name);
@@ -60,7 +61,6 @@ const EditProfilePage = () => {
       formDataToSend.append("avatar", avatar);
     }
 
-    try {
       const response = await axiosMultipartInstance.put(
         `/user/update/${user._id}`,
         formDataToSend);

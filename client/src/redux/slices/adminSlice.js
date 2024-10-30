@@ -11,9 +11,9 @@ const adminSlice = createSlice({
       state.adminUser = action.payload.adminUser;
       state.adminToken = action.payload.adminToken;
     },
-    updateAdminSettings(state, action) {
-      state.adminUser = action.payload.adminUser;
-    },
+		updateAdmin(state, action) {
+			state.adminUser = action.payload.adminUser;
+		},
     clearAdmin(state) {
       state.adminUser = null;
       state.adminToken = null;
@@ -21,5 +21,5 @@ const adminSlice = createSlice({
   }
 });
 
-export const { setAdmin, updateAdminSettings, clearAdmin } = adminSlice.actions;
+export const { setAdmin, updateAdmin, clearAdmin } = adminSlice.actions;
 export default adminSlice.reducer;

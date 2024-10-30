@@ -1,99 +1,132 @@
-import React, { useState } from 'react';
-import { Search, Edit2, Trash2, Home } from 'lucide-react';
-import '../../../styles/Admin/Dashboard/AdminDashboard.scss';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Search, Edit2, Trash2, Home, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import "../../../styles/Admin/Dashboard/AdminDashboard.scss";
+import axios from "axios";
+import { axiosGet } from "../../../api/axiosConfig";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-    { id: 3, name: 'Mike Johnson', email: 'mike@example.com' },
-    { id: 4, name: 'Sarah Williams', email: 'sarah@example.com' },
-  ]);
+	const [users, setUsers] = useState([]);
 
-  const navigate = useNavigate()
+	const navigate = useNavigate();
+	const [searchQuery, setSearchQuery] = useState("");
 
-  const handleEdit = (id) => {
-    console.log(`Edit user with id: ${id}`);
-    navigate(`/admin/edit-user`)
-  };
+  useEffect(()=> {
+    const  fetchUsers = async () => {
+      try {
+        const response = await axiosGet('/admin/manage-users')
+        setUsers(response.data)
+      } catch (error) {
+        console.log("Dashboard user fetching failed:", error.message);
+        
+      }
+      fetchUsers();
+    }
 
-  const handleSearch = (e) => {
-  }
+  },[])
 
-  const handleDelete = (id) => {
-    console.log(`Delete user with id: ${id}`);
-  };
+	const handleEdit = (id) => {
+		console.log(`Edit user with id: ${id}`);
+		navigate(`/admin/edit-user`);
+	};
 
-  return (
-    <div className="dashboard-container">
-      <div className="dashboard-card">
-        <div className="dashboard-card__header">
-          <h1 className="dashboard-card__title">Admin Dashboard</h1>
-          <button 
-            className="dashboard-card__nav-button"
-            onClick={() => navigate('/admin/home')}
-          >
-            <Home className="dashboard-card__nav-icon" />
-            Back to Home
-          </button>
-        </div>
+	const handleSearch = (e) => {
+		setSearchQuery(e.target.value);
+	};
 
-        <div className="dashboard-card__actions">
-          <div className="dashboard-card__search">
-            <Search className="dashboard-card__search-icon" />
-            <input 
-              type="text" 
-              placeholder="Search users..." 
-              className="dashboard-card__search-input"
-              onChange={handleSearch}
-            />
-          </div>
-          <button onClick={()=>navigate('/admin/add-user')} className="dashboard-card__add-button">
-            Add New User
-          </button>
-        </div>
+	const handleDelete = (id) => {
+		setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+	};
 
-        <div className="dashboard-card__content">
-          <table className="dashboard-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map(user => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td className="dashboard-table__actions">
-                    <button 
-                      className="dashboard-table__action-btn dashboard-table__action-btn--edit"
-                      onClick={() => handleEdit(user.id)}
-                    >
-                      <Edit2 size={16} />
-                      Edit
-                    </button>
-                    <button 
-                      className="dashboard-table__action-btn dashboard-table__action-btn--delete"
-                      onClick={() => handleDelete(user.id)}
-                    >
-                      <Trash2 size={16} />
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
+	const filteredUsers = users.filter(
+		(user) =>
+			user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+			user.email.toLowerCase().includes(searchQuery.toLowerCase())
+	);
+
+	return (
+		<div className="dashboard-container">
+			<div className="dashboard-card">
+				<div className="dashboard-card__header">
+					<h1 className="dashboard-card__title">Admin Dashboard</h1>
+					<button
+						className="dashboard-card__nav-button"
+						onClick={() => navigate("/admin/home")}>
+						<Home className="dashboard-card__nav-icon" />
+						Back to Home
+					</button>
+				</div>
+
+				<div className="dashboard-card__actions">
+					<div className="dashboard-card__search">
+						<Search className="dashboard-card__search-icon" />
+						<input
+							type="text"
+							placeholder="Search users..."
+							className="dashboard-card__search-input"
+							onChange={handleSearch}
+						/>
+					</div>
+					<button
+						onClick={() => navigate("/admin/add-user")}
+						className="dashboard-card__add-button">
+						Add New User
+					</button>
+				</div>
+
+				<div className="dashboard-card__content">
+					<table className="dashboard-table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>User</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{filteredUsers.map((user, index) => (
+								<tr key={index}>
+									<td>{index + 1}</td>
+									<td>
+										<div className="dashboard-table__user">
+											{filteredUsers.avatar ? (
+												<img
+													src={user.avatar}
+													alt={`${user.name}'s avatar`}
+													className="dashboard-table__avatar"
+												/>
+											) : (
+												<User />
+											)}
+											<span>{user.name}</span>
+										</div>
+									</td>
+									<td>{user.email}</td>
+									<td className="dashboard-table__actions">
+										<button
+											className="dashboard-table__action-btn dashboard-table__action-btn--edit"
+											onClick={() => handleEdit(user.id)}>
+											<Edit2 size={16} />
+											Edit
+										</button>
+										<button
+											className="dashboard-table__action-btn dashboard-table__action-btn--delete"
+											onClick={() =>
+												handleDelete(user.id)
+											}>
+											<Trash2 size={16} />
+											Delete
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Dashboard;

@@ -164,6 +164,20 @@ $white: #ffffff;
     background: $gray-50;
   }
 
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $gray-200;
+  }
+
   &__actions {
     display: flex;
     gap: 0.5rem;

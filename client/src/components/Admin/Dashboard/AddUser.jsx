@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../../../styles/Admin/Dashboard/Add_User.scss';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,10 +32,6 @@ const AddUser = () => {
     <div className="dashboard-container">
       <div className="dashboard-card">
         <div className="dashboard-cardheader">
-          <button className="dashboard-cardnav-button" onClick={handleBack}>
-            <span>←</span>
-            Back to Dashboard
-          </button>
           <h1 className="dashboard-cardtitle">Add New User</h1>
         </div>
         <div className="dashboard-cardcontent">

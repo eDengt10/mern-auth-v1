@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "../../../styles/Admin/Dashboard/Add_User.scss";
+import { useNavigate } from "react-router-dom";
 
 const EditUser = () => {
+	const navigate = useNavigate()
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -40,12 +41,6 @@ const EditUser = () => {
 			<div className="dashboard-card">
 				<div className="dashboard-card__header">
 					<h1 className="dashboard-card__title">Edit User</h1>
-					<Link to='/admin/dashboard' className="dashboard-card__link">
-						<button
-							className="dashboard-card__nav-button">
-							Back to Dashboard
-						</button>
-					</Link>
 				</div>
 
 				<div className="dashboard-card__content">
@@ -101,7 +96,8 @@ const EditUser = () => {
 						<div className="form-actions">
 							<button
 								type="button"
-								className="dashboard-card__nav-button">
+								className="dashboard-card__nav-button"
+								onClick={()=>navigate('/admin/dashboard')}>
 								Cancel
 							</button>
 							<button
