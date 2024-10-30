@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../../../styles/Admin/Dashboard/Add_User.scss';
 import { useNavigate } from 'react-router-dom';
+import { axiosInstance } from '../../../api/axiosConfig';
 
 const AddUser = () => {
   const [formData, setFormData] = useState({
@@ -12,16 +13,23 @@ const AddUser = () => {
   const navigate = useNavigate()
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form data submitted:', formData);
+    try {
+      const response = await axiosInstance.post('/admin/add-user', formData);
+      if(response.status === 200 ) {
+        navigate('/admin/dashboard')
+      }
+    } catch (error) {
+      console.log("Add user error(Frontend):", error);
+      
+    }
   };
 
   const handleBack = () => {
@@ -45,6 +53,7 @@ const AddUser = () => {
                 value={formData.name}
                 onChange={handleChange}
                 className="dashboard-cardsearch-input"
+                placeholder='Enter name'
                 required
               />
             </div>
@@ -57,6 +66,8 @@ const AddUser = () => {
                 value={formData.email}
                 onChange={handleChange}
                 className="dashboard-cardsearch-input"
+                placeholder='Enter email'
+
                 required
               />
             </div>
@@ -69,6 +80,7 @@ const AddUser = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 className="dashboard-cardsearch-input"
+                placeholder='Enter phone number'
                 required
               />
             </div>
@@ -80,6 +92,7 @@ const AddUser = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
+                placeholder='Enter password'
                 className="dashboard-cardsearch-input"
                 required
               />

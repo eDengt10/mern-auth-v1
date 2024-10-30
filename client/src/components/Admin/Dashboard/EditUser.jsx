@@ -2,47 +2,54 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "../../../styles/Admin/Dashboard/Add_User.scss";
-
+import { axiosInstance } from "../../../api/axiosConfig";
 
 const EditUser = () => {
-	const BASE_URL = "http://localhost:3001"
+	const BASE_URL = "http://localhost:3001";
 
-	const {id} = useParams()
-	const navigate = useNavigate()
+	const { id } = useParams();
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
 		phone: "",
-		password: "",
+		newPassword: "",
 	});
-	
+
 	useEffect(() => {
-		const fetchUser = async() => {
+		const fetchUser = async () => {
 			try {
-				const response = await axios.get(`${BASE_URL}/admin/get-user/${id}`);
-				setFormData(response.data.userData)
+				const response = await axios.get(
+					`${BASE_URL}/admin/get-user/${id}`
+				);
+				setFormData(response.data.userData);
 			} catch (error) {
-				console.log("Get user Error:",error.message);
+				console.log("Get user Error:", error.message);
 			}
-		}
+		};
 		fetchUser();
 	}, []);
-	
+
 	const handleChange = (e) => {
 		console.log(formData);
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
-	});
-		
+		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("Form data submitted:", formData);
-		// Handle form submission
+		try {
+			const response = await axiosInstance.put(
+				`/admin/update-user/${id}`,
+				formData
+			);
+			if(response.status === 200) navigate("/admin/dashboard");
+		} catch (error) {
+			console.log("Update user Error:", error.message);
+		}
 	};
-
 
 	return (
 		<div className="dashboard-container">
@@ -76,7 +83,6 @@ const EditUser = () => {
 								className="dashboard-card__search-input"
 								required
 								placeholder="Enter email"
-
 							/>
 						</div>
 
@@ -90,7 +96,6 @@ const EditUser = () => {
 								className="dashboard-card__search-input"
 								required
 								placeholder="Enter number"
-
 							/>
 						</div>
 
@@ -98,8 +103,8 @@ const EditUser = () => {
 							<label>Password</label>
 							<input
 								type="password"
-								name="password"
-								value={formData?.password || ""}
+								name="newPassword"
+								value={formData?.newPassword || ""}
 								onChange={handleChange}
 								className="dashboard-card__search-input"
 								placeholder="Leave blank to keep current password"
@@ -110,7 +115,7 @@ const EditUser = () => {
 							<button
 								type="button"
 								className="dashboard-card__nav-button"
-								onClick={()=>navigate('/admin/dashboard')}>
+								onClick={() => navigate("/admin/dashboard")}>
 								Cancel
 							</button>
 							<button

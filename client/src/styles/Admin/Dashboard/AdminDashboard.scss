@@ -136,7 +136,6 @@ $white: #ffffff;
   }
 }
 
-// Table
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -145,7 +144,7 @@ $white: #ffffff;
   th, td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid $gray-200;
+    // border-bottom: 1px solid $gray-200;
     text-align: center;
 
   }
@@ -168,8 +167,13 @@ $white: #ffffff;
   // }
   &__user {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 0.75rem;
+  }
+
+  &__user-name {
+    text-align: left;
+    font-weight: 600;
   }
 
   &__avatar {
@@ -182,7 +186,8 @@ $white: #ffffff;
 
   &__actions {
     display: flex;
-    gap: 0.5rem;
+    justify-content: space-evenly;
+    margin-top: 10px;
   }
 
   &__action-btn {

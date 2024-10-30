@@ -14,9 +14,6 @@ const axiosMultipartInstance = axios.create({
 		"Content-Type": "multipart/form-data",
 	},
 });
-const axiosGet = axios.create({
-	baseURL,
-})
 
-export {  axiosInstance, axiosMultipartInstance, axiosGet };
+export {  axiosInstance, axiosMultipartInstance };
 

@@ -7,23 +7,23 @@ import axios from "axios";
 const Dashboard = () => {
 	const [users, setUsers] = useState([]);
 
-  const BASE_URL = "http://localhost:3001"
+	const BASE_URL = "http://localhost:3001";
 
 	const navigate = useNavigate();
 	const [searchQuery, setSearchQuery] = useState("");
 
-  useEffect(()=> {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/admin/get-users`)
-        
-        setUsers(response.data.usersData)
-      } catch (error) {
-        console.log("Dashboard user fetching failed:", error.message);
-      }
-    }
-    fetchUsers();
-  },[])
+	useEffect(() => {
+		const fetchUsers = async () => {
+			try {
+				const response = await axios.get(`${BASE_URL}/admin/get-users`);
+
+				setUsers(response.data.usersData);
+			} catch (error) {
+				console.log("Dashboard user fetching failed:", error.message);
+			}
+		};
+		fetchUsers();
+	}, []);
 
 	const handleEdit = (id) => {
 		console.log(`Edit user with id: ${id}`);
@@ -35,12 +35,12 @@ const Dashboard = () => {
 	};
 
 	const handleDelete = async (userId) => {
-    try {
-      await axios.delete(`${BASE_URL}/admin/delete-user/${userId}`)
-      setUsers(users.filter(user=>user._id !== userId))
-    } catch (error) {
-      console.log("User deleting failed:", error.message);      
-    }
+		try {
+			await axios.delete(`${BASE_URL}/admin/delete-user/${userId}`);
+			setUsers(users.filter((user) => user._id !== userId));
+		} catch (error) {
+			console.log("User deleting failed:", error.message);
+		}
 	};
 
 	const filteredUsers = users.filter(
@@ -48,6 +48,7 @@ const Dashboard = () => {
 			user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			user.email.toLowerCase().includes(searchQuery.toLowerCase())
 	);
+	console.log(filteredUsers, "Filtered users");
 
 	return (
 		<div className="dashboard-container">
@@ -84,26 +85,31 @@ const Dashboard = () => {
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>User</th>
+								<th>Avatar</th>
+								<th>Username</th>
 								<th>Email</th>
 								<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							{filteredUsers.map((user, index) => (                
+							{filteredUsers.map((user, index) => (
 								<tr key={user._id}>
 									<td>{index + 1}</td>
 									<td>
 										<div className="dashboard-table__user">
-											{filteredUsers.avatar ? (
+											{user.avatar ? (
 												<img
-													src={user.avatar}
+													src={BASE_URL + user.avatar}
 													alt={`${user.name}'s avatar`}
 													className="dashboard-table__avatar"
 												/>
 											) : (
 												<User />
 											)}
+										</div>
+									</td>
+									<td>
+										<div className="dashboard-table__user-name">
 											<span>{user.name}</span>
 										</div>
 									</td>
@@ -111,7 +117,9 @@ const Dashboard = () => {
 									<td className="dashboard-table__actions">
 										<button
 											className="dashboard-table__action-btn dashboard-table__action-btn--edit"
-											onClick={() => handleEdit(user._id)}>
+											onClick={() =>
+												handleEdit(user._id)
+											}>
 											<Edit2 size={16} />
 											Edit
 										</button>
@@ -124,7 +132,7 @@ const Dashboard = () => {
 											Delete
 										</button>
 									</td>
-                  {/* <td className="dashboard-table__isadmin">
+									{/* <td className="dashboard-table__isadmin">
 
                     {user.is_admin ? <UserCog2Icon size={20}/> : ""}
                   </td> */}
