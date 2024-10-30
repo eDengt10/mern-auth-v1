@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import "../../../styles/Admin/Dashboard/Add_User.scss";
-import { useNavigate } from "react-router-dom";
+
 
 const EditUser = () => {
+	const BASE_URL = "http://localhost:3001"
+
+	const {id} = useParams()
 	const navigate = useNavigate()
 	const [formData, setFormData] = useState({
 		name: "",
@@ -10,23 +15,26 @@ const EditUser = () => {
 		phone: "",
 		password: "",
 	});
-
+	
 	useEffect(() => {
-		const userData = {
-			name: "John Doe",
-			email: "john@example.com",
-			phone: "+1234567890",
-			password: "",
-		};
-		setFormData(userData);
+		const fetchUser = async() => {
+			try {
+				const response = await axios.get(`${BASE_URL}/admin/get-user/${id}`);
+				setFormData(response.data.userData)
+			} catch (error) {
+				console.log("Get user Error:",error.message);
+			}
+		}
+		fetchUser();
 	}, []);
-
+	
 	const handleChange = (e) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({
-			...prevData,
-			[name]: value,
-		}));
+		console.log(formData);
+		setFormData({
+			...formData,
+			[e.target.name]: e.target.value,
+	});
+		
 	};
 
 	const handleSubmit = (e) => {
@@ -50,10 +58,11 @@ const EditUser = () => {
 							<input
 								type="text"
 								name="name"
-								value={formData.name}
+								value={formData?.name || ""}
 								onChange={handleChange}
 								className="dashboard-card__search-input"
 								required
+								placeholder="Enter name"
 							/>
 						</div>
 
@@ -62,10 +71,12 @@ const EditUser = () => {
 							<input
 								type="email"
 								name="email"
-								value={formData.email}
+								value={formData?.email || ""}
 								onChange={handleChange}
 								className="dashboard-card__search-input"
 								required
+								placeholder="Enter email"
+
 							/>
 						</div>
 
@@ -74,10 +85,12 @@ const EditUser = () => {
 							<input
 								type="tel"
 								name="phone"
-								value={formData.phone}
+								value={formData?.phone || ""}
 								onChange={handleChange}
 								className="dashboard-card__search-input"
 								required
+								placeholder="Enter number"
+
 							/>
 						</div>
 
@@ -86,7 +99,7 @@ const EditUser = () => {
 							<input
 								type="password"
 								name="password"
-								value={formData.password}
+								value={formData?.password || ""}
 								onChange={handleChange}
 								className="dashboard-card__search-input"
 								placeholder="Leave blank to keep current password"

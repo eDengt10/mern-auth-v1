@@ -140,11 +140,14 @@ $white: #ffffff;
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;
+  
 
   th, td {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid $gray-200;
+    text-align: center;
+
   }
 
   th {
@@ -160,10 +163,9 @@ $white: #ffffff;
     font-size: 0.875rem;
   }
 
-  tr:hover td {
-    background: $gray-50;
-  }
-
+  // tr:hover td {
+  //   // background: $gray-50;
+  // }
   &__user {
     display: flex;
     align-items: center;

@@ -1,41 +1,46 @@
 import { useEffect, useState } from "react";
-import { Search, Edit2, Trash2, Home, User } from "lucide-react";
+import { Search, Edit2, Trash2, Home, User, UserCog2Icon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/Admin/Dashboard/AdminDashboard.scss";
 import axios from "axios";
-import { axiosGet } from "../../../api/axiosConfig";
 
 const Dashboard = () => {
 	const [users, setUsers] = useState([]);
+
+  const BASE_URL = "http://localhost:3001"
 
 	const navigate = useNavigate();
 	const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(()=> {
-    const  fetchUsers = async () => {
+    const fetchUsers = async () => {
       try {
-        const response = await axiosGet('/admin/manage-users')
-        setUsers(response.data)
+        const response = await axios.get(`${BASE_URL}/admin/get-users`)
+        
+        setUsers(response.data.usersData)
       } catch (error) {
         console.log("Dashboard user fetching failed:", error.message);
-        
       }
-      fetchUsers();
     }
-
+    fetchUsers();
   },[])
 
 	const handleEdit = (id) => {
 		console.log(`Edit user with id: ${id}`);
-		navigate(`/admin/edit-user`);
+		navigate(`/admin/edit-user/${id}`);
 	};
 
 	const handleSearch = (e) => {
 		setSearchQuery(e.target.value);
 	};
 
-	const handleDelete = (id) => {
-		setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+	const handleDelete = async (userId) => {
+    try {
+      await axios.delete(`${BASE_URL}/admin/delete-user/${userId}`)
+      setUsers(users.filter(user=>user._id !== userId))
+    } catch (error) {
+      console.log("User deleting failed:", error.message);      
+    }
 	};
 
 	const filteredUsers = users.filter(
@@ -85,8 +90,8 @@ const Dashboard = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredUsers.map((user, index) => (
-								<tr key={index}>
+							{filteredUsers.map((user, index) => (                
+								<tr key={user._id}>
 									<td>{index + 1}</td>
 									<td>
 										<div className="dashboard-table__user">
@@ -106,19 +111,23 @@ const Dashboard = () => {
 									<td className="dashboard-table__actions">
 										<button
 											className="dashboard-table__action-btn dashboard-table__action-btn--edit"
-											onClick={() => handleEdit(user.id)}>
+											onClick={() => handleEdit(user._id)}>
 											<Edit2 size={16} />
 											Edit
 										</button>
 										<button
 											className="dashboard-table__action-btn dashboard-table__action-btn--delete"
 											onClick={() =>
-												handleDelete(user.id)
+												handleDelete(user._id)
 											}>
 											<Trash2 size={16} />
 											Delete
 										</button>
 									</td>
+                  {/* <td className="dashboard-table__isadmin">
+
+                    {user.is_admin ? <UserCog2Icon size={20}/> : ""}
+                  </td> */}
 								</tr>
 							))}
 						</tbody>
