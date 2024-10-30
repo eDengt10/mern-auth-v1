@@ -20,6 +20,7 @@ import {
 	AdminInitialPathHandle,
 } from "./contexts/ProtectUserRoute";
 import EditAdmin from "./components/Admin/Home/EditAdmin";
+import ErrorPage from "./pages/ErrorPage";
 
 //* ====== Main App Component ====== *//
 function App() {
@@ -118,6 +119,13 @@ function App() {
 						</ProtectAdminPages>
 					}
 				/>
+				<Route
+					path="*"
+					element={
+							<ErrorPage />
+					}
+				/>
+				
 			</Routes>
 		</Router>
 	);

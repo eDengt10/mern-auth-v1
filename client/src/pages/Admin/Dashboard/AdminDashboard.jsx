@@ -1,4 +1,3 @@
-import React from 'react'
 import Dashboard from '../../../components/Admin/Dashboard/Dashboard'
 import AdminHeader from '../../../components/Admin/Home/AdminHeader'
 

@@ -1,0 +1,8 @@
+@import './AuthPage/AuthPage.scss';
+
+.error-card {
+  &__image {
+    max-width: 300px;
+    margin-bottom: 2rem;
+  }
+}

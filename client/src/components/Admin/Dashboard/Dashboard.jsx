@@ -92,7 +92,8 @@ const Dashboard = () => {
 							</tr>
 						</thead>
 						<tbody>
-							{filteredUsers.map((user, index) => (
+							
+							{filteredUsers.length > 0 && filteredUsers.map((user, index) => (
 								<tr key={user._id}>
 									<td>{index + 1}</td>
 									<td>
@@ -138,6 +139,8 @@ const Dashboard = () => {
                   </td> */}
 								</tr>
 							))}
+							{filteredUsers.length === 0 &&  <tr><td style={ {fontWeight: 700, fontSize: "18px"} }  colSpan="5">User Not Found</td></tr>}
+
 						</tbody>
 					</table>
 				</div>
