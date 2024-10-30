@@ -15,6 +15,13 @@ const EditUser = () => {
 		phone: "",
 		newPassword: "",
 	});
+	const [errors, setErrors] = useState({
+		name: "",
+		email: "",
+		phone: "",
+		newPassword: "",
+		message: ""
+	});
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -31,11 +38,28 @@ const EditUser = () => {
 	}, []);
 
 	const handleChange = (e) => {
-		console.log(formData);
+		const { name, value } = e.target;
+
 		setFormData({
 			...formData,
-			[e.target.name]: e.target.value,
+			[name]: value,
 		});
+
+		let error = "";
+		if (name === "email") {
+			if (
+				!value.includes("@") ||
+				!value.includes(".") ||
+				/[^a-zA-Z0-9@.]/.test(value)
+			) {
+				error = "Invalid email address";
+			}
+		} else if (name === "password") {
+			if (value.length < 4) {
+				error = "Password must be at least 4 characters long";
+			}
+		}
+		setErrors({ ...errors, [name]: error });
 	};
 
 	const handleSubmit = async (e) => {
@@ -45,7 +69,7 @@ const EditUser = () => {
 				`/admin/update-user/${id}`,
 				formData
 			);
-			if(response.status === 200) navigate("/admin/dashboard");
+			if (response.status === 200) navigate("/admin/dashboard");
 		} catch (error) {
 			console.log("Update user Error:", error.message);
 		}
