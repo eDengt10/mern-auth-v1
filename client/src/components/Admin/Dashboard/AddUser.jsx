@@ -87,7 +87,7 @@ const AddUser = () => {
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <input
-                type="password"
+                type="text"
                 id="password"
                 name="password"
                 value={formData.password}

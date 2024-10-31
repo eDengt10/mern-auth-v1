@@ -126,7 +126,7 @@ const EditUser = () => {
 						<div className="form-group">
 							<label>Password</label>
 							<input
-								type="password"
+								type="text"
 								name="newPassword"
 								value={formData?.newPassword || ""}
 								onChange={handleChange}

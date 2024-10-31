@@ -41,7 +41,9 @@ const userSignIn = async (req, res) => {
 const userSignUp = async (req, res) => {
 	const { name, email, phone, password } = req.body;
 	try {
-		const existingUser = await User.findOne({ email, name });
+		const existingUser = await User.findOne({
+			$or: [{ email }, { phone }],
+		});
 		if (existingUser) {
 			return res.status(400).json({ message: "User already exists" });
 		}
@@ -84,7 +86,7 @@ const adminSignIn = async (req, res) => {
 			message: "Admin login successful",
 			adminToken: token,
 			adminData: admin,
-			success:true
+			success: true,
 		});
 	} catch (error) {
 		console.log("Admin Signin Error:", error.message);

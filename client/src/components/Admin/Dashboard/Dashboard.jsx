@@ -16,8 +16,9 @@ const Dashboard = () => {
 		const fetchUsers = async () => {
 			try {
 				const response = await axios.get(`${BASE_URL}/admin/get-users`);
+				const data = response.data.usersData
 
-				setUsers(response.data.usersData);
+				setUsers(data);
 			} catch (error) {
 				console.log("Dashboard user fetching failed:", error.message);
 			}
@@ -48,7 +49,6 @@ const Dashboard = () => {
 			user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			user.email.toLowerCase().includes(searchQuery.toLowerCase())
 	);
-	console.log(filteredUsers, "Filtered users");
 
 	return (
 		<div className="dashboard-container">

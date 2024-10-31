@@ -57,10 +57,6 @@ const EditProfilePage = () => {
 			) {
 				error = "Invalid email address";
 			}
-		} else if (name === "password") {
-			if (value.length < 4) {
-				error = "Password must be at least 4 characters long";
-			}
 		} else if (name === "name") {
 			if (value.length < 3) {
 				error = "Name must be at least 3 characters long";
@@ -70,11 +66,11 @@ const EditProfilePage = () => {
 				error = "Invalid phone number";
 			}
 		} else if (name === "currentPassword") {
-			if (value.length < 4 && value.length !== 0 ) {
+			if (value.length < 6 && value.length !== 0 ) {
 				error = "Current password must be at least 6 characters long";
 			}
 		} else if (name === "newPassword") {
-			if (value.length < 6) {
+			if (value.length < 6 && value.length !== 0 ) {
 				error = "New password must be at least 6 characters long";
 			}
 		}
