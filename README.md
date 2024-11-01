@@ -59,5 +59,5 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ## Contact
 For any questions or contributions, feel free to reach out or open a pull request.
 
-©️ Copyright
+
 © 2024 eDenGT. All rights reserved.
