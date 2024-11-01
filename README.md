@@ -2,7 +2,6 @@
 
 A MERN stack application designed for secure user authentication, featuring a user-friendly interface, an admin dashboard, and a robust authorization system. This project demonstrates effective use of **Redux** for state management and **JWT** for secure user authentication and role-based access control.
 
-![Project Preview](https://via.placeholder.com/800x400) <!-- Replace with an actual screenshot or GIF of your app -->
 
 ## ✨ Features
 
@@ -26,8 +25,6 @@ A MERN stack application designed for secure user authentication, featuring a us
   - 👀 View all users in the database.
   - 🔍 Search users based on criteria.
   - ✏️ Create, delete, and edit user details for efficient user management.
-
-![Admin Dashboard](https://via.placeholder.com/800x400) <!-- Replace with actual dashboard screenshot -->
 
 ---
 
