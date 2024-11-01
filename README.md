@@ -46,7 +46,7 @@ A MERN stack application designed for secure user authentication, featuring a us
 ### Instructions
 Clone the repository:
    ```bash
-   git clone https://github.com/your-username/mern-auth-project.git
+   git clone https://github.com/eDenxGT/mern-auth-v1/.git
    ```
    Use code with caution. ⚠️
 
